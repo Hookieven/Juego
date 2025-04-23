@@ -6,6 +6,47 @@ using System.Threading.Tasks;
 
 namespace Juego
 {
+    public class Personaje 
+    {
+        public string Color;
+        public int Vida, Defensa, Fuerza, Mana;
+
+        public void CambiarColor(string NuevoColor) 
+        {
+            Color = NuevoColor;
+        }
+        public int RecibirDaño(int Daño) 
+        {
+            int DañoEfectivo = (Daño - Defensa);
+            if (DañoEfectivo < 0) 
+            {
+                DañoEfectivo = 0;
+            }
+            Vida -= DañoEfectivo;
+            
+            if (Vida <= 0) 
+            {
+                Console.WriteLine("✝Te fuiste al cielo✝");
+            }
+            return DañoEfectivo;
+        }
+        public int Atacar(Personaje Personaje) 
+        {
+            if (Mana > 0)
+            {
+                Mana -= 1;
+                Personaje.RecibirDaño(Fuerza);
+                return Fuerza;
+            }
+            else 
+            {
+                Console.WriteLine("Sin maná");
+                return 0;
+            }
+            
+        }
+
+    }
     internal class Program
     {
         public static void Carga(Personaje Personaje)
@@ -23,11 +64,11 @@ namespace Juego
         }
         public static void MostrarDatos(Personaje Personaje) 
         {
-            Console.WriteLine("Color: " + Personaje.Color);
-            Console.WriteLine("Vida: " + Personaje.Vida);
-            Console.WriteLine("Defensa: " + Personaje.Defensa);
-            Console.WriteLine("Fuerza: " + Personaje.Fuerza);
-            Console.WriteLine("Mana: " + Personaje.Mana);
+                Console.WriteLine("Color: " + Personaje.Color);
+                Console.WriteLine("Vida: " + Personaje.Vida);
+                Console.WriteLine("Defensa: " + Personaje.Defensa);
+                Console.WriteLine("Fuerza: " + Personaje.Fuerza);
+                Console.WriteLine("Mana: " + Personaje.Mana);
         }
         static void Main(string[] args)
         {
