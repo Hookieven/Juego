@@ -1,0 +1,26 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Juego
+{
+    internal class PocionMana : Pocion
+    {
+        Random Random = new Random();
+        public override int Usar(Personaje Personaje)
+        {
+            if (Maximo > Personaje.VidaInicial) 
+            {
+                Maximo = Personaje.VidaInicial;
+            }
+            if (Minimo < 0) 
+            {
+                Minimo = 0;
+            }
+            Personaje.Vida += Random.Next(Minimo, Maximo);
+            return Personaje.Vida;
+        }
+    }
+}

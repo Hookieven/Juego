@@ -9,7 +9,7 @@ namespace Juego
     public class Personaje
     {
         public string Color;
-        public int Vida, Defensa, Fuerza, Mana;
+        public int VidaInicial, Vida, Defensa, Fuerza, ManaInicial, Mana;
 
         public void CambiarColor(string NuevoColor)
         {

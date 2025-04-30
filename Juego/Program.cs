@@ -13,13 +13,13 @@ namespace Juego
             Console.WriteLine("Ingrese el Color del personaje");
             Personaje.CambiarColor(Console.ReadLine());
             Console.WriteLine("Ingrese la Vida del personaje");
-            Personaje.Vida = int.Parse(Console.ReadLine());
+            Personaje.Vida = int.Parse(Console.ReadLine()); Personaje.VidaInicial = Personaje.Vida;
             Console.WriteLine("Ingrese la Defensa del personaje");
             Personaje.Defensa = int.Parse(Console.ReadLine());
             Console.WriteLine("Ingrese la Fuerza del personaje");
             Personaje.Fuerza = int.Parse(Console.ReadLine());
             Console.WriteLine("Ingrese el Mana del personaje");
-            Personaje.Mana = int.Parse(Console.ReadLine());
+            Personaje.Mana = int.Parse(Console.ReadLine()); Personaje.ManaInicial = Personaje.Mana;
         }
         public static void MostrarDatos(Personaje Personaje) 
         {
@@ -45,6 +45,7 @@ namespace Juego
                 Console.WriteLine("1- Cambiar de Color");
                 Console.WriteLine("2- Recibir Daño");
                 Console.WriteLine("3- Atacar");
+                Console.WriteLine("4- Usar Poción");
                 int Seleccion = int.Parse(Console.ReadLine()); Console.Clear();
                 switch (Seleccion)
                 {
