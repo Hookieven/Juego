@@ -11,16 +11,20 @@ namespace Juego
         Random Random = new Random();
         public override int Usar(Personaje Personaje)
         {
-            if (Maximo > Personaje.VidaInicial) 
+            if (Maximo > Personaje.ManaInicial) 
             {
-                Maximo = Personaje.VidaInicial;
+                Maximo = Personaje.ManaInicial;
             }
             if (Minimo < 0) 
             {
                 Minimo = 0;
             }
-            Personaje.Vida += Random.Next(Minimo, Maximo);
-            return Personaje.Vida;
+            Personaje.Mana += Random.Next(Minimo, Maximo);
+            if (Personaje.Mana > Personaje.ManaInicial) 
+            {
+                Personaje.Mana = Personaje.ManaInicial;
+            }
+            return Personaje.Mana;
         }
     }
 }

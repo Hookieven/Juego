@@ -20,6 +20,10 @@ namespace Juego
                 Minimo = 0;
             }
             Personaje.Vida += Random.Next(Minimo, Maximo);
+            if (Personaje.Vida > Personaje.VidaInicial)
+            {
+                Personaje.Vida = Personaje.VidaInicial;
+            }
             return Personaje.Vida;
         }
     }

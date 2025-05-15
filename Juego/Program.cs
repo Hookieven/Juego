@@ -70,6 +70,47 @@ namespace Juego
                         }
                         Console.ReadKey();
                         break;
+                    case 4:
+                        PocionVida PocionVida = new PocionVida(); PocionMana PocionMana = new PocionMana();
+                        Console.WriteLine("Que pocion quiere usar");
+                        Console.WriteLine("1- Vida  2- Mana");
+                        int Pocion = int.Parse(Console.ReadLine());
+                        Console.WriteLine("Sobre quien quiere usar la pocion?");
+                        Console.WriteLine("1- Jugador  2- Enemigo");
+                        int Receptor = int.Parse(Console.ReadLine());
+                        Console.WriteLine("Ingrese un Minimo");
+                        PocionMana.Minimo = int.Parse(Console.ReadLine()); PocionVida.Minimo = int.Parse(Console.ReadLine());
+                        Console.WriteLine("Ingrese un Maximo");
+                        PocionMana.Maximo = int.Parse(Console.ReadLine()); PocionVida.Maximo = int.Parse(Console.ReadLine());
+                        switch (Pocion)
+                        {
+                            case 1:
+                                switch (Receptor) 
+                                {
+                                    case 1:
+                                        PocionVida.Usar(Personaje1);
+                                        break;
+                                    case 2:
+                                        PocionVida.Usar(Personaje2);
+                                        break;
+                                }
+                                break;
+                            case 2:
+                                switch (Receptor)
+                                {
+                                    case 1:
+                                        PocionMana.Usar(Personaje1);
+                                        break;
+                                    case 2:
+                                        PocionMana.Usar(Personaje2);
+                                        break;
+                                }
+                                break;
+                            default:
+                                Console.WriteLine("Elija una de las pociones manito");
+                                break;
+                        }
+                        break;
                     default:
                         Console.WriteLine("Elija una de las opciones");
                         break;
