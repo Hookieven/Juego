@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Juego
 {
-    internal abstract class Pocion : Item
+    internal abstract class Item
     {
-        public int Minimo;
-        public int Maximo;
+        public Inventario Inventario;
+        public abstract int Usar(Personaje Personaje);
     }
 }

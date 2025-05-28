@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Juego
 {
-    public class Personaje
+    internal class Personaje
     {
         public string Color;
         public int VidaInicial, Vida, Defensa, Fuerza, ManaInicial, Mana;
+        public Inventario Inventario;
 
         public void CambiarColor(string NuevoColor)
         {

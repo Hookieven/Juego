@@ -10,6 +10,8 @@ namespace Juego
     {
         public static void Carga(Personaje Personaje)
         {
+            Inventario Inventario = new Inventario();
+            PocionVida PocionVida = new PocionVida(); PocionMana PocionMana = new PocionMana();
             Console.WriteLine("Ingrese el Color del personaje");
             Personaje.CambiarColor(Console.ReadLine());
             Console.WriteLine("Ingrese la Vida del personaje");
@@ -20,14 +22,23 @@ namespace Juego
             Personaje.Fuerza = int.Parse(Console.ReadLine());
             Console.WriteLine("Ingrese el Mana del personaje");
             Personaje.Mana = int.Parse(Console.ReadLine()); Personaje.ManaInicial = Personaje.Mana;
+            Personaje.Inventario = Inventario; Inventario.Personaje = Personaje;
+            Personaje.Inventario.AgregarItem(PocionVida);
+            Personaje.Inventario.AgregarItem(PocionMana); 
         }
         public static void MostrarDatos(Personaje Personaje) 
         {
-                Console.WriteLine("Color: " + Personaje.Color);
-                Console.WriteLine("Vida: " + Personaje.Vida);
-                Console.WriteLine("Defensa: " + Personaje.Defensa);
-                Console.WriteLine("Fuerza: " + Personaje.Fuerza);
-                Console.WriteLine("Mana: " + Personaje.Mana);
+            Console.WriteLine("---Estadisticas---");
+            Console.WriteLine($"Color: {Personaje.Color}");
+            Console.WriteLine($"Vida: {Personaje.Vida}");
+            Console.WriteLine($"Defensa: {Personaje.Defensa}");
+            Console.WriteLine($"Fuerza: {Personaje.Fuerza}");
+            Console.WriteLine($"Mana: {Personaje.Mana}");
+            Console.WriteLine("---Inventario---");
+            foreach (Item item in Personaje.Inventario.Items)
+            {
+                Console.WriteLine($"- {item}");
+            }
         }
         static void Main(string[] args)
         {
@@ -79,19 +90,20 @@ namespace Juego
                         Console.WriteLine("1- Jugador  2- Enemigo");
                         int Receptor = int.Parse(Console.ReadLine());
                         Console.WriteLine("Ingrese un Minimo");
-                        PocionMana.Minimo = int.Parse(Console.ReadLine()); PocionVida.Minimo = int.Parse(Console.ReadLine());
-                        Console.WriteLine("Ingrese un Maximo");
-                        PocionMana.Maximo = int.Parse(Console.ReadLine()); PocionVida.Maximo = int.Parse(Console.ReadLine());
+                        PocionMana.Minimo = int.Parse(Console.ReadLine()); PocionVida.Minimo = PocionMana.Minimo;                       Console.WriteLine("Ingrese un Maximo");
+                        PocionMana.Maximo = int.Parse(Console.ReadLine()); PocionVida.Maximo = PocionMana.Minimo;
                         switch (Pocion)
                         {
                             case 1:
                                 switch (Receptor) 
                                 {
                                     case 1:
-                                        PocionVida.Usar(Personaje1);
+                                        PocionVida.Usar(Personaje1); Console.ReadKey();
+                                        Personaje1.Inventario.QuitarItem(PocionVida);
                                         break;
                                     case 2:
                                         PocionVida.Usar(Personaje2);
+                                        Personaje2.Inventario.QuitarItem(PocionVida);
                                         break;
                                 }
                                 break;
@@ -100,9 +112,11 @@ namespace Juego
                                 {
                                     case 1:
                                         PocionMana.Usar(Personaje1);
+                                        Personaje1.Inventario.QuitarItem(PocionMana);
                                         break;
                                     case 2:
                                         PocionMana.Usar(Personaje2);
+                                        Personaje2.Inventario.QuitarItem(PocionMana);
                                         break;
                                 }
                                 break;
