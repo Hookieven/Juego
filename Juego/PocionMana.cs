@@ -26,5 +26,9 @@ namespace Juego
             }
             return Personaje.Mana;
         }
+        public override string ToString()
+        {
+            return "Pocion de Mana";
+        }
     }
 }
