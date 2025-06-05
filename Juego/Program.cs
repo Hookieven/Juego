@@ -25,14 +25,9 @@ namespace Juego
             Personaje.Inventario = Inventario; Inventario.Personaje = Personaje;
             Personaje.Inventario.AgregarItem(PocionVida);
             Personaje.Inventario.AgregarItem(PocionMana);
-        }
-        public static void MostrarInventario(Personaje Personaje) 
-        {
-            Console.WriteLine("---Inventario---");
-            foreach (Item item in Personaje.Inventario.Items)
-            {
-                Console.WriteLine($"- {item}");
-            }
+            Personaje.Inventario.AgregarItem(new Casco());
+            Personaje.Inventario.AgregarItem(new Chaleco());
+            Personaje.Inventario.AgregarItem(new Espada());
         }
         public static void MostrarDatos(Personaje Personaje) 
         {
@@ -42,6 +37,11 @@ namespace Juego
             Console.WriteLine($"Defensa: {Personaje.Defensa}");
             Console.WriteLine($"Fuerza: {Personaje.Fuerza}");
             Console.WriteLine($"Mana: {Personaje.Mana}");
+            Console.WriteLine("---Inventario---");
+            foreach (Item item in Personaje.Inventario.Items)
+            {
+                Console.WriteLine($"- {item}");
+            }
         }
         static void Main(string[] args)
         {
@@ -52,9 +52,9 @@ namespace Juego
             do
             {
                 Console.Clear();
-                Console.WriteLine("Personaje 1:"); MostrarDatos(Personaje1); MostrarInventario(Personaje1);
+                Console.WriteLine("Personaje 1:"); MostrarDatos(Personaje1);
                 Console.WriteLine("");
-                Console.WriteLine("Personaje 2:"); MostrarDatos(Personaje2); MostrarInventario(Personaje2);
+                Console.WriteLine("Personaje 2:"); MostrarDatos(Personaje2);
                 Console.WriteLine("");
                 Console.WriteLine("1- Cambiar de Color");
                 Console.WriteLine("2- Recibir Daño");
@@ -87,70 +87,66 @@ namespace Juego
                         Console.ReadKey();
                         break;
                     case 4:
-                        MostrarInventario(Personaje1);
-                        Console.WriteLine("Que");
-                        Console.WriteLine("Que pocion quiere usar");
-                        Console.WriteLine("1- Vida  2- Mana");
-                        int Pocion = int.Parse(Console.ReadLine());
-                        Console.WriteLine("Sobre quien quiere usar la pocion?");
-                        Console.WriteLine("1- Jugador  2- Enemigo");
-                        int Receptor = int.Parse(Console.ReadLine());
-                        Console.WriteLine("Ingrese un Minimo");
-                        PocionMana.Minimo = int.Parse(Console.ReadLine()); PocionVida.Minimo = PocionMana.Minimo;
-                        Console.WriteLine("Ingrese un Maximo");
-                        PocionMana.Maximo = int.Parse(Console.ReadLine()); PocionVida.Maximo = PocionMana.Minimo;
-                        switch (Pocion)
+                        int i = 0; Console.WriteLine("---Inventario---");
+                        foreach (Item item in Personaje1.Inventario.Items)
                         {
-                            case 1:
-                                switch (Receptor) 
-                                {
-                                    case 1:
-                                        if (Personaje1.Inventario.Items.Contains(PocionVida) == true)
-                                        {
-                                            PocionVida.Usar(Personaje1);
-                                            Personaje1.Inventario.QuitarItem(PocionVida);
-                                        }
-                                        else { Console.WriteLine($"El Personaje {Personaje1.Color} no tiene una Pocion de Vida"); Console.ReadKey(); }
-                                        break;
-                                    case 2:
-                                        if (Personaje2.Inventario.Items.Contains(PocionVida) == true)
-                                        {
-                                            PocionVida.Usar(Personaje2);
-                                            Personaje2.Inventario.QuitarItem(PocionVida);
-                                        }
-                                        else { Console.WriteLine($"El Personaje {Personaje2.Color} no tiene una Pocion de Vida"); Console.ReadKey(); }
-                                        break;
-                                }
-                                break;
-                            case 2:
-                                switch (Receptor)
-                                {
-                                    case 1:
-                                        if (Personaje1.Inventario.Items.Contains(PocionMana) == true)
-                                        {
-                                            PocionMana.Usar(Personaje1);
-                                            Personaje1.Inventario.QuitarItem(PocionMana);
-                                        }
-                                        else { Console.WriteLine($"El Personaje {Personaje1.Color} no tiene una Pocion de Mana"); Console.ReadKey(); }
-                                        break;
-                                    case 2:
-                                        if (Personaje2.Inventario.Items.Contains(PocionMana) == true)
-                                        {
-                                            PocionMana.Usar(Personaje2);
-                                            Personaje2.Inventario.QuitarItem(PocionMana);
-                                        }
-                                        else { Console.WriteLine($"El Personaje {Personaje2.Color} no tiene una Pocion de Mana"); Console.ReadKey(); }
-                                        break;
-                                }
-                                break;
-                            default:
-                                Console.WriteLine("Elija una de las pociones manito");
-                                break;
+                            Console.WriteLine($"{i}- {item}"); i++;
                         }
+                        Console.WriteLine(""); Console.WriteLine("Que item quiere usar?");
+                        int ItemAUsar = int.Parse(Console.ReadLine());
+                        if (Personaje1.Inventario.Items[ItemAUsar] is IUsable usable)
+                        {
+                            Console.WriteLine("Sobre quien quiere usar la pocion?");
+                            Console.WriteLine("1- Jugador  2- Enemigo");
+                            int Receptor = int.Parse(Console.ReadLine());
+                            switch (Receptor)
+                            {
+                                case 1:
+                                    usable.Usar(Personaje1);
+                                    Personaje1.Inventario.QuitarItem(Personaje1.Inventario.Items[ItemAUsar]);
+                                    break;
+                                case 2:
+                                    usable.Usar(Personaje2);
+                                    Personaje1.Inventario.QuitarItem(Personaje1.Inventario.Items[ItemAUsar]);
+                                    break;
+                                default:
+                                    Console.WriteLine("Elija una de las opciones");
+                                    break;
+                            }
+                        }
+                        else { Console.WriteLine("Este objeto no es Usable"); }
+                        break;
+                    case 5:
+                        int e = 0; Console.WriteLine("---Inventario---");
+                        foreach (Item item in Personaje1.Inventario.Items)
+                        {
+                            Console.WriteLine($"{e}- {item}"); e++;
+                        }
+                        Console.WriteLine(""); Console.WriteLine("Que item quiere equipar?");
+                        int ItemAEquipar = int.Parse(Console.ReadLine());
+                        if (Personaje1.Inventario.Items[ItemAEquipar] is IEquipable equipar)
+                        {
+                            equipar.Equipar(Personaje1);
+                        }
+                        else { Console.WriteLine("Este objeto no es Equipable"); }
+                        break;
+                    case 6:
+                        int d = 0; Console.WriteLine("---Inventario---");
+                        foreach (Item item in Personaje1.Inventario.Items)
+                        {
+                            Console.WriteLine($"{d}- {item}"); d++;
+                        }
+                        Console.WriteLine(""); Console.WriteLine("Que item quiere desequipar?");
+                        int ItemADesquipar = int.Parse(Console.ReadLine());
+                        if (Personaje1.Inventario.Items[ItemADesquipar] is IEquipable desequipar)
+                        {
+                            desequipar.Desequipar(Personaje1);
+                        }
+                        else { Console.WriteLine("Este objeto no está equipado"); }
                         break;
                     default:
-                        Console.WriteLine("Elija una de las opciones");
-                        break;
+                    Console.WriteLine("Elija una de las opciones");
+                    break;
                 }
             } while (Personaje1.Vida != 0);
         }

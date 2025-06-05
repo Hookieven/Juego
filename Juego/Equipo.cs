@@ -14,7 +14,6 @@ namespace Juego
     public abstract class Equipo : Item, IEquipable
     {
         public bool Equipado;
-
         public abstract void Desequipar(Personaje Personaje);
         public abstract void Equipar(Personaje Personaje);
     }
