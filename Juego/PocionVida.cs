@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Juego
 {
-    internal class PocionVida : Pocion
+    public class PocionVida : Pocion
     {
         Random Random = new Random();
         public override int Usar(Personaje Personaje)

@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace Juego
 {
-    internal abstract class Pocion : Item
+    public interface IUsable 
+    {
+        int Usar(Personaje Personaje);
+    }
+    public abstract class Pocion : Item, IUsable
     {
         public int Minimo;
         public int Maximo;
+        public abstract int Usar(Personaje Personaje);
     }
 }

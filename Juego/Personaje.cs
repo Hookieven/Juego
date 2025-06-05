@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Juego
 {
-    internal class Personaje
+    public class Personaje
     {
         public string Color;
         public int VidaInicial, Vida, Defensa, Fuerza, ManaInicial, Mana;

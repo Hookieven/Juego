@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Juego
 {
-    internal class Inventario
+    public class Inventario
     {
         public Personaje Personaje;
         public List<Item> Items = new List<Item>();

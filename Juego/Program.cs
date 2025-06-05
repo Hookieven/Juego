@@ -24,7 +24,15 @@ namespace Juego
             Personaje.Mana = int.Parse(Console.ReadLine()); Personaje.ManaInicial = Personaje.Mana;
             Personaje.Inventario = Inventario; Inventario.Personaje = Personaje;
             Personaje.Inventario.AgregarItem(PocionVida);
-            Personaje.Inventario.AgregarItem(PocionMana); 
+            Personaje.Inventario.AgregarItem(PocionMana);
+        }
+        public static void MostrarInventario(Personaje Personaje) 
+        {
+            Console.WriteLine("---Inventario---");
+            foreach (Item item in Personaje.Inventario.Items)
+            {
+                Console.WriteLine($"- {item}");
+            }
         }
         public static void MostrarDatos(Personaje Personaje) 
         {
@@ -34,11 +42,6 @@ namespace Juego
             Console.WriteLine($"Defensa: {Personaje.Defensa}");
             Console.WriteLine($"Fuerza: {Personaje.Fuerza}");
             Console.WriteLine($"Mana: {Personaje.Mana}");
-            Console.WriteLine("---Inventario---");
-            foreach (Item item in Personaje.Inventario.Items)
-            {
-                Console.WriteLine($"- {item}");
-            }
         }
         static void Main(string[] args)
         {
@@ -49,14 +52,16 @@ namespace Juego
             do
             {
                 Console.Clear();
-                Console.WriteLine("Personaje 1:"); MostrarDatos(Personaje1);
+                Console.WriteLine("Personaje 1:"); MostrarDatos(Personaje1); MostrarInventario(Personaje1);
                 Console.WriteLine("");
-                Console.WriteLine("Personaje 2:"); MostrarDatos(Personaje2);
+                Console.WriteLine("Personaje 2:"); MostrarDatos(Personaje2); MostrarInventario(Personaje2);
                 Console.WriteLine("");
                 Console.WriteLine("1- Cambiar de Color");
                 Console.WriteLine("2- Recibir Daño");
                 Console.WriteLine("3- Atacar");
-                Console.WriteLine("4- Usar Poción");
+                Console.WriteLine("4- Usar Item");
+                Console.WriteLine("5- Equipar Item");
+                Console.WriteLine("6- Desquipar Item");
                 int Seleccion = int.Parse(Console.ReadLine()); Console.Clear();
                 switch (Seleccion)
                 {
@@ -82,6 +87,8 @@ namespace Juego
                         Console.ReadKey();
                         break;
                     case 4:
+                        MostrarInventario(Personaje1);
+                        Console.WriteLine("Que");
                         Console.WriteLine("Que pocion quiere usar");
                         Console.WriteLine("1- Vida  2- Mana");
                         int Pocion = int.Parse(Console.ReadLine());
