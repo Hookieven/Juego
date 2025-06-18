@@ -26,7 +26,6 @@ namespace Juego
             }
             return Personaje.Vida;
         }
-
         public override string ToString()
         {
             return "Pocion de Vida";

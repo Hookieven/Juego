@@ -99,6 +99,12 @@ namespace Juego
                             Console.WriteLine("Sobre quien quiere usar la pocion?");
                             Console.WriteLine("1- Jugador  2- Enemigo");
                             int Receptor = int.Parse(Console.ReadLine());
+                            Console.WriteLine("Ingrese un Maximo");
+                            PocionMana.Maximo = int.Parse(Console.ReadLine());
+                            PocionVida.Maximo = PocionMana.Maximo;
+                            Console.WriteLine("Ingrese un Minimo");
+                            PocionMana.Minimo = int.Parse(Console.ReadLine());
+                            PocionVida.Minimo = PocionMana.Minimo;
                             switch (Receptor)
                             {
                                 case 1:
@@ -114,7 +120,7 @@ namespace Juego
                                     break;
                             }
                         }
-                        else { Console.WriteLine("Este objeto no es Usable"); }
+                        else { Console.WriteLine("Este objeto no es Usable"); Console.ReadKey(); }
                         break;
                     case 5:
                         int e = 0; Console.WriteLine("---Inventario---");
@@ -128,7 +134,7 @@ namespace Juego
                         {
                             equipar.Equipar(Personaje1);
                         }
-                        else { Console.WriteLine("Este objeto no es Equipable"); }
+                        else { Console.WriteLine("Este objeto no es Equipable"); Console.ReadKey(); }
                         break;
                     case 6:
                         int d = 0; Console.WriteLine("---Inventario---");
